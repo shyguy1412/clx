@@ -1,4 +1,4 @@
-import type { JSXInternal, CLXComponent, PropsWithChildren, VNode, CLXElement } from "./jsx.d.ts";
+import type { JSXInternal, CLXComponent, PropsWithChildren, VNode, CLXElement } from "@/jsx.d.ts";
 
 export declare namespace clx {
   //@ts-ignore this works, idk why its complaining

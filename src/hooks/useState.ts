@@ -1,4 +1,4 @@
-import { useReducer } from "@/src/hooks/useReducer.ts";
+import { useReducer } from "@/hooks/useReducer.ts";
 
 
 type StateUpdater<S> = (state: S | ((prevState: S) => S)) => void;

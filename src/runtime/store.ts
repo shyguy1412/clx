@@ -1,3 +1,5 @@
+import type { CLXNode } from "@/TOM/nodes/CLXNode.ts";
+
 export type ReducerState<S> = Partial<{
   initialized: boolean;
   current: S;
@@ -7,6 +9,7 @@ type HookState = ReducerState<any>;
 
 type ComponentStore = {
   state: HookState[];
+  node: CLXNode;
   currentHook: number;
 };
 
@@ -18,32 +21,31 @@ class RuntimeStore {
 
   }
 
-  setActiveElement(id: string) {
+  setActiveElement(id: string, clxNode: CLXNode) {
     if (!this.store.has(id))
-      this.store.set(id, createNewComponentStore());
+      this.store.set(id, createNewComponentStore(clxNode));
 
     this.store.get(id)!.currentHook = 0;
     this.activeElement = id;
   }
 
-  unsetActiveElement(){
+  unsetActiveElement() {
     this.activeElement = undefined;
   }
 
 
-  getState<S extends HookState>(): S {
+  getState<S extends HookState>(): { state: S, node: CLXNode; } {
     if (!this.activeElement) throw new Error("No element is being rendered");
     const store = this.store.get(this.activeElement)!;
     if (store.currentHook >= store.state.length) store.state.push({});
-    console.log({store});
-    
-    return <S>store.state[store.currentHook++];
+    return { state: <S>store.state[store.currentHook++], node: store.node };
   }
 }
 
-function createNewComponentStore(): ComponentStore {
+function createNewComponentStore(node: CLXNode): ComponentStore {
   return {
     state: [],
+    node,
     currentHook: 0
   };
 }

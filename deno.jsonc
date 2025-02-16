@@ -6,12 +6,13 @@
   "tasks": {
   },
   "imports": {
-    "@/": "./"
+    "@/": "./src/"
   },
   "lint": {
     "rules": {
       "exclude": [
-        "no-explicit-any"
+        "no-explicit-any",
+        "no-this-alias"
       ]
     }
   }

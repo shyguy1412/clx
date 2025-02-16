@@ -38,4 +38,8 @@ export namespace JSXInternal {
     children: any;
   }
 
+  export interface IntrinsicElements {
+    span: any
+  }
+
 }
